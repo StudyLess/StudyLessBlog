@@ -4,6 +4,15 @@
     ViewBag.Title = "List";
 }
 
+<!-- Adding a Search Box -->
+@using (Html.BeginForm("List", "Article", FormMethod.Get))
+{
+    <p>
+        Find by word: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <div class="container">
     <div class="row">
         @foreach (var article in Model)
@@ -18,8 +27,14 @@
                     <p>
                         @article.Content
                     </p>
-                    <footer class="pull-right">
-                        <small class="author">
+                    <footer>
+                        <div class="pull-left">
+                            @foreach (var tag in article.Tags)
+                            {
+                                @Html.ActionLink(tag.Name, "List", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })
+                            }
+                        </div>
+                        <small class="author pull-right">
                             --author @article.Author.FullName
                         </small>
                     </footer>
@@ -28,4 +43,4 @@
         }
     </div>
 </div>
-<hr />
+
