@@ -4,6 +4,15 @@
     ViewBag.Title = "List";
 }
 
+<!-- Adding a Search Box -->
+@using (Html.BeginForm("List", "Article", FormMethod.Get))  
+{
+    <p>
+        Find by word: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <div class="container">
     <div class="row">
         @foreach (var article in Model)
