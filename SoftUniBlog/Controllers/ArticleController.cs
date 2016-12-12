@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;    // first must be installed PagedList.MVC NuGet Package - Tools->NuGet Package Manager->Package Manager Console->write this: Install-Package PagedList.Mvc
 
 namespace SoftUniBlog.Controllers
 {
@@ -22,11 +23,25 @@ namespace SoftUniBlog.Controllers
 
         //
         // GET: Article/List
-        public ActionResult List(string searchString) //add new parameters
-            //the value of searchString is received from a text box in the view List
+        public ActionResult List(string sortOrder, string currentFilter, string searchString, int? page) //add new parameters
         {
             using (var database = new BlogDbContext())
             {
+                ViewBag.CurrentSort = sortOrder;
+
+                // if we change the searchString, the page has to be reset to 1
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                // provides the view with the current filter string
+                ViewBag.CurrentFilter = searchString;
+
                 // Get articles from database
                 var articles = database.Articles
                     .Include(a => a.Author)
@@ -38,7 +53,27 @@ namespace SoftUniBlog.Controllers
                     articles = articles.Where(s => s.Title.Contains(searchString) || s.Content.Contains(searchString));
                 }
 
-                return View(articles.ToList()); // added .ToList()
+                switch (sortOrder)
+                {
+                    case "title_desc":
+                        articles = articles.OrderByDescending(s => s.Title);
+                        break;
+                    case "Author":
+                        articles = articles.OrderBy(s => s.Author);
+                        break;
+                    case "author_desc":
+                        articles = articles.OrderByDescending(s => s.Author);
+                        break;
+                    default:
+                        articles = articles.OrderBy(s => s.Title);
+                        break;
+                }
+
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+
+                // converts the articles in special collection type
+                return View(articles.ToPagedList(pageNumber, pageSize));
             }    
         }
 
