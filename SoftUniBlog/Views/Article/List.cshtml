@@ -1,4 +1,6 @@
-﻿@model List<SoftUniBlog.Models.Article>
+﻿@model PagedList.IPagedList<SoftUniBlog.Models.Article>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "List";
@@ -43,5 +45,10 @@
         }
     </div>
 </div>
-<hr />
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("List",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
