@@ -22,17 +22,23 @@ namespace SoftUniBlog.Controllers
 
         //
         // GET: Article/List
-        public ActionResult List()
+        public ActionResult List(string searchString) //add new parameters
+            //the value of searchString is received from a text box in the view List
         {
             using (var database = new BlogDbContext())
             {
                 // Get articles from database
                 var articles = database.Articles
                     .Include(a => a.Author)
-                    .Include(a => a.Tags)
-                    .ToList();
+                    .Include(a => a.Tags); // deleted .ToList()
 
-                return View(articles);
+                //checking if the title or the content of the article contains the searchString
+                if (!string.IsNullOrEmpty(searchString)) 
+                {
+                    articles = articles.Where(s => s.Title.Contains(searchString) || s.Content.Contains(searchString));
+                }
+
+                return View(articles.ToList()); // added .ToList()
             }    
         }
 
