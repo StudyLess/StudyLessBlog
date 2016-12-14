@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace SoftUniBlog.Controllers
 {
@@ -29,7 +30,7 @@ namespace SoftUniBlog.Controllers
             }
         }
 
-        public ActionResult ListArticles(int? categoryId)
+        public ActionResult ListArticles(int? categoryId, int? page)
         {
             if (categoryId == null)
             {
@@ -41,10 +42,12 @@ namespace SoftUniBlog.Controllers
                 var articles = database.Articles
                     .Where(a => a.CategoryId == categoryId)
                     .Include(a => a.Author)
-                    .Include(a => a.Tags)
-                    .ToList();
+                    .Include(a => a.Tags);
 
-                return View(articles);
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+
+                return View(articles.OrderBy(a => a.Title).ToPagedList(pageNumber, pageSize));
             }
         }
     }
