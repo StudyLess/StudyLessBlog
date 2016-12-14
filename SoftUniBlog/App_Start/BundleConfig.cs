@@ -24,7 +24,7 @@ namespace SoftUniBlog
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme.css",   //change from bootstrap.css to bootstrap-theme.css
                       "~/Content/site.css"));
         }
     }
