@@ -11,7 +11,7 @@
             <table class="table table-striped table-hover col-sm-12">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <!--<th>#</th>-->
                         <th>Name</th>
                         <th>Actions</th>
                     </tr>
@@ -20,7 +20,7 @@
                     @foreach (var category in Model)
                     {
                         <tr>
-                            <td>@category.Id</td>
+                            <!--<td>@category.Id</td>-->
                             <td>@category.Name</td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", "Category", new { @id = category.Id }, null)
