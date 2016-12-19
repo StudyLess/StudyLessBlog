@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using SoftUniBlog.Extensions;
 using SoftUniBlog.Models;
 using System;
 using System.Collections.Generic;
@@ -124,6 +125,8 @@ namespace SoftUniBlog.Controllers.Admin
                     // Save changes
                     database.Entry(user).State = EntityState.Modified;
                     database.SaveChanges();
+                    //will show message when user is edited
+                    this.AddNotification("User edited.", NotificationType.INFO);
 
                     return RedirectToAction("List");
                 }
@@ -189,6 +192,8 @@ namespace SoftUniBlog.Controllers.Admin
                 // Delete user and save changes
                 database.Users.Remove(user);
                 database.SaveChanges();
+                //will show message when user is deleted
+                this.AddNotification("User deleted.", NotificationType.WARNING);
 
                 return RedirectToAction("List");
             }
