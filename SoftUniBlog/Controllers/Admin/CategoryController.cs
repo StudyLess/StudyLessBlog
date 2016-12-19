@@ -1,4 +1,6 @@
-﻿using SoftUniBlog.Models;
+﻿// View->Other Windows->Package Manager Console->write this: Install-Package BootstrapNotifications
+using SoftUniBlog.Extensions; 
+using SoftUniBlog.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -48,6 +50,8 @@ namespace SoftUniBlog.Controllers.Admin
                 {
                     database.Categories.Add(category);
                     database.SaveChanges();
+                    //will show message when category is created
+                    this.AddNotification("Category created.", NotificationType.SUCCESS);
 
                     return RedirectToAction("Index");
                 }
@@ -90,6 +94,8 @@ namespace SoftUniBlog.Controllers.Admin
                 {
                     database.Entry(category).State = EntityState.Modified;
                     database.SaveChanges();
+                    //will show message when category is edited
+                    this.AddNotification("Category edited.", NotificationType.INFO);
 
                     return RedirectToAction("Index");
                 }
@@ -142,6 +148,8 @@ namespace SoftUniBlog.Controllers.Admin
 
                 database.Categories.Remove(category);
                 database.SaveChanges();
+                //will show message when category is deleted
+                this.AddNotification("Category deleted.", NotificationType.WARNING);
 
                 return RedirectToAction("Index");
             }

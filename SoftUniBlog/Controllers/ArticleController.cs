@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;    // first must be installed PagedList.MVC NuGet Package - Tools->NuGet Package Manager->Package Manager Console->write this: Install-Package PagedList.Mvc
-using SoftUniBlog.Extensions;
+using SoftUniBlog.Extensions; // View->Other Windows->Package Manager Console->write this: Install-Package BootstrapNotifications
 
 namespace SoftUniBlog.Controllers
 {
