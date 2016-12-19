@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;    // first must be installed PagedList.MVC NuGet Package - Tools->NuGet Package Manager->Package Manager Console->write this: Install-Package PagedList.Mvc
+using SoftUniBlog.Extensions;
 
 namespace SoftUniBlog.Controllers
 {
@@ -145,6 +146,8 @@ namespace SoftUniBlog.Controllers
                     // Save article in DB
                     database.Articles.Add(article);
                     database.SaveChanges();
+                    //will show message when article is created
+                    this.AddNotification("Article created.", NotificationType.SUCCESS); 
 
                     return RedirectToAction("Index");
                 }
@@ -217,6 +220,8 @@ namespace SoftUniBlog.Controllers
                 // Delete article from database
                 database.Articles.Remove(article);
                 database.SaveChanges();
+                //will show message when article is deleted
+                this.AddNotification("Article deleted.", NotificationType.WARNING);
 
                 // Redirect to index page
                 return RedirectToAction("Index");
@@ -289,6 +294,8 @@ namespace SoftUniBlog.Controllers
                     // Save article state in database
                     database.Entry(article).State = EntityState.Modified;
                     database.SaveChanges();
+                    //will show message when article is edited
+                    this.AddNotification("Article edited.", NotificationType.INFO);
 
                     // Redirect to the index page
                     return RedirectToAction("Index");

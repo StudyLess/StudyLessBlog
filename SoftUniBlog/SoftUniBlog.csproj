@@ -210,6 +210,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,6 +299,7 @@
     <Content Include="Views\Home\ListArticles.cshtml" />
     <Content Include="Views\Home\ListCategories.cshtml" />
     <Content Include="Views\Tag\List.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,6 +24,8 @@
         </div>
     </div>
     <div class="container body-content">
+        <!-- To display the notification messages at the top of each page we want, we have to render the _Nofitications partial view -->
+        @Html.Partial("_Notifications")
         @RenderBody()
         <footer class="pull-right">
             <p>&copy; @DateTime.Now.Year - StudyLess Blog</p>
