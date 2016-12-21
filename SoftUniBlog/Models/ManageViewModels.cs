@@ -58,6 +58,41 @@ namespace SoftUniBlog.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangeProfileInformationViewModel
+    {
+        [Required]
+        [Display(Name = "Nickname")]
+        public string Nickname { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of birth")]
+        public string DateOfBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required]
+        [Display(Name = "Sign")]
+        public string Sign { get; set; }
+    }
+
     public class AddPhoneNumberViewModel
     {
         [Required]
@@ -82,5 +117,11 @@ namespace SoftUniBlog.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class AddAvatarViewModel
+    {
+        [Display(Name = "Add avatar")]
+        public string ProfileImage { get; set; }
     }
 }

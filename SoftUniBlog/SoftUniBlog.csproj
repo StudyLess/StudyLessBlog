@@ -300,6 +300,8 @@
     <Content Include="Views\Home\ListCategories.cshtml" />
     <Content Include="Views\Tag\List.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Manage\AddAvatar.cshtml" />
+    <Content Include="Views\Manage\ChangeProfileInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

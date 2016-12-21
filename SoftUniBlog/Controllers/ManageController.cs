@@ -32,9 +32,9 @@ namespace SoftUniBlog.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -322,6 +322,8 @@ namespace SoftUniBlog.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -333,7 +335,15 @@ namespace SoftUniBlog.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult ChangeProfileInformation()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/AddPhoneNumber
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +394,19 @@ namespace SoftUniBlog.Controllers
             Error
         }
 
-#endregion
+
+        public ActionResult ChangeProfileInformationViewModel()
+        {
+            return View();
+        }
+
+        public ActionResult AddAvatarViewModel()
+        {
+            return View();
+        }
+
+
+
+        #endregion
     }
 }
